@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dragon's Dungeon - Timed Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0;
+            height: 100vh;
+            background: #000000 url('https://images.unsplash.com/photo-1611135152188-3b34ef9d04f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fGRhcmt8ZW58MHx8fHwxNjc2ODUxNzI1&ixlib=rb-1.2.1&q=80&w=1920') center/cover no-repeat fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Press Start 2P', cursive;
+            color: #ffffff;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            color: #ff4500;
+            text-shadow: 2px 2px 10px #000;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .dragon, .sword {
+            display: block;
+            margin: 0 auto;
+            max-width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .dragon:hover { transform: translateY(-10px); }
+        .sword:hover { transform: rotate(10deg); }
+
+        .instructions {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        .button {
+            background: #ff4500;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #ff0000;
+            transform: scale(1.05);
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px #000;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accessButton = document.getElementById('accessButton');
+            const message = document.getElementById('message');
+
+            function checkAccess() {
+                const currentTime = new Date();
+                const startTime = new Date();
+                const endTime = new Date();
+
+                startTime.setHours(14, 30, 0);
+                endTime.setHours(15, 30, 0);
+
+                if (currentTime >= startTime && currentTime <= endTime) {
+                    message.textContent = "Access granted! Click the button to enter the dungeon!";
+                    accessButton.disabled = false;
+                } else {
+                    message.textContent = "Access restricted! Return between 2:30 PM and 3:30 PM.";
+                    accessButton.disabled = true;
+                }
+            }
+
+            checkAccess();
+            setInterval(checkAccess, 1000);
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <img src="3.gif" alt="Dragon" class="dragon">
+        <h1 class="title">The Dragon's Dungeon</h1>
+        <p class="instructions">Instructions:<br>1. There are four levels.<br>2. In the first level, choose the right answer.<br>3. In the second level, choose the correct image.<br>4. In the third level, search for the word in the water.<br>5. In the fourth level, traverse every block to find the question.<br>6. Defeat the dragon with the given instructions.</p>
+        <p id="message" class="message">Checking access...</p>
+        <img src="2.png" alt="Sword" class="sword">
+        <button id="accessButton" class="button" disabled onclick="window.location.href='https://view.genially.com/681c89aa553a04f3dc2305e3';">Enter the Dungeon</button>
+    </div>
+</body>
+</html>
